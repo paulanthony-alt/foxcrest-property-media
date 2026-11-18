@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#1f2a24"/>
+  <!-- fox head shaped like a roofline -->
+  <path d="M12 14l12 10h16l12-10v20L32 54 12 34z" fill="#e0703a"/>
+  <path d="M20 36l12 12 12-12-6 2-6-4-6 4z" fill="#f6efe6"/>
+  <circle cx="25" cy="31" r="2.4" fill="#1f2a24"/>
+  <circle cx="39" cy="31" r="2.4" fill="#1f2a24"/>
+  <path d="M30 44h4l-2 2.5z" fill="#1f2a24"/>
+</svg>
