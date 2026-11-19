@@ -59,6 +59,8 @@ Other things already in place to reduce risk:
 - Color contrast, keyboard access and labels that pass an automated WCAG 2.1 AA scan (axe)
 - Fonts hosted on the site itself, so visitors' data isn't sent to Google
 
+See **[COMPLIANCE.md](COMPLIANCE.md)** for the full privacy, accessibility and licensing checklist, including items that aren't needed yet and **what would trigger them** (for example, adding Google Analytics means adding a cookie banner). Check it before adding any new script, embed or form field.
+
 ## Publishing
 
 Any static host works. Free options: GitHub Pages (Settings → Pages → deploy from branch), Netlify, or Cloudflare Pages. Just upload the folder; there is nothing to build.

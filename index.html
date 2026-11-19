@@ -19,7 +19,7 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
-      <nav id="nav-links" class="nav-links">
+      <nav id="nav-links" class="nav-links" aria-label="Main">
         <a href="#work">Our Work</a>
         <a href="#why">Why Video</a>
         <a href="#pricing">Pricing</a>
@@ -76,7 +76,7 @@
           <button class="filter" data-filter="land" aria-pressed="false">Land & Acreage</button>
         </div>
         <div id="portfolio" class="portfolio"></div>
-        <p class="work-note">Videos are shown with the permission of the property owner or listing agent. Property details are as provided at the time of filming and may have changed.</p>
+        <p class="work-note">Videos are shown with the permission of the property owner or listing agent. Property details are as provided at the time of filming and may have changed. Videos play from YouTube or Vimeo and nothing loads from them until you press play.</p>
       </div>
     </section>
 
@@ -191,7 +191,7 @@
             <label>Email<input name="email" type="email" autocomplete="email" required /></label>
           </div>
           <div class="row">
-            <label><span>Phone <small>(optional)</small></span><input name="phone" type="tel" autocomplete="tel" /></label>
+            <label><span>Phone <small>(optional, only used about this request)</small></span><input name="phone" type="tel" autocomplete="tel" /></label>
             <label>I am a…
               <select name="role">
                 <option>Real estate agent</option>
@@ -201,7 +201,7 @@
               </select>
             </label>
           </div>
-          <label>Property address or area<input name="address" type="text" placeholder="123 Main St, Springfield" /></label>
+          <label><span>Property address or area <small>(optional, helps us quote travel)</small></span><input name="address" type="text" autocomplete="off" placeholder="123 Main St, Springfield" /></label>
 
           <fieldset>
             <legend>What do you need?</legend>
@@ -238,7 +238,7 @@
         <img src="assets/logo.svg" alt="" width="32" height="32" />
         <span>Foxcrest <em>Property Media</em></span>
       </a>
-      <nav>
+      <nav aria-label="Footer">
         <a href="#work">Our Work</a>
         <a href="#pricing">Pricing</a>
         <a href="#quote">Contact</a>
@@ -248,12 +248,13 @@
         <a href="terms.html">Terms of Service</a>
         <a href="privacy.html">Privacy Policy</a>
         <a href="accessibility.html">Accessibility</a>
+        <a href="privacy.html#your-rights">Privacy choices &amp; data deletion</a>
       </nav>
     </div>
   </footer>
 
   <!-- Video lightbox -->
-  <dialog id="video-modal" class="video-modal">
+  <dialog id="video-modal" class="video-modal" aria-label="Property walkthrough video">
     <button class="modal-close" aria-label="Close video">&times;</button>
     <div class="modal-body"></div>
   </dialog>

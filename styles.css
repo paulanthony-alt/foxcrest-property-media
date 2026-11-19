@@ -278,7 +278,7 @@ legend { font-family: var(--serif); font-weight: 500; font-size: 1.1rem; margin-
 .legal h2 { font-size: 1.35rem; margin-top: 2em; }
 .legal p, .legal li { color: var(--ink-soft); }
 .legal li { margin-bottom: .4em; }
-.legal a { color: var(--fox-text); }
+.legal a:not(.btn) { color: var(--fox-text); }
 .legal .updated { color: var(--muted); font-size: .9rem; }
 .legal .callout { background: var(--bg-alt); border-left: 4px solid var(--fox); padding: 14px 18px; border-radius: 8px; margin: 1.5em 0; }
 .legal .callout p { margin: 0; color: var(--ink); }

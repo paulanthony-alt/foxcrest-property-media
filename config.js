@@ -24,6 +24,11 @@ window.FOXCREST = {
   // then paste its endpoint here, e.g. "https://formspree.io/f/abcdwxyz".
   formEndpoint: "",
 
+  // Load YouTube's own thumbnails for cards with no thumbnail set?
+  // Leave false: true makes every visitor's browser contact Google on page load,
+  // which needs a cookie/consent banner in some regions. See COMPLIANCE.md.
+  autoYouTubeThumbnails: false,
+
   // ---- Prices (used by the live estimate on the quote form) ----
   prices: {
     walkthrough: 300,
@@ -35,7 +40,9 @@ window.FOXCREST = {
   // type: "house", "condo" or "land" (used by the filter buttons)
   // video: a YouTube or Vimeo link, or a path to an .mp4 file in /videos.
   //        Leave empty ("") to show a "coming soon" card.
-  // thumbnail: optional image path. YouTube thumbnails are fetched automatically.
+  // thumbnail: optional image path, e.g. "assets/thumbs/maple-ridge.jpg" (use your own stills).
+  // thumbnailAlt: optional short description of the thumbnail for screen readers,
+  //               e.g. "Bright open-plan kitchen with island". Defaults to the title.
   portfolio: [
     {
       title: "Modern Family Home",

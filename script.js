@@ -30,6 +30,13 @@
     var open = links.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
   });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && links.classList.contains("is-open")) {
+      links.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus();
+    }
+  });
   links.addEventListener("click", function (ev) {
     if (ev.target.tagName === "A") {
       links.classList.remove("is-open");
@@ -50,7 +57,7 @@
     var yt = youTubeId(url);
     if (yt) return '<iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?autoplay=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Property walkthrough"></iframe>';
     var vm = vimeoId(url);
-    if (vm) return '<iframe src="https://player.vimeo.com/video/' + vm + '?autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Property walkthrough"></iframe>';
+    if (vm) return '<iframe src="https://player.vimeo.com/video/' + vm + '?autoplay=1&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Property walkthrough"></iframe>';
     return '<video src="' + url + '" controls autoplay playsinline></video>';
   }
   function esc(s) {
@@ -63,7 +70,9 @@
   var hues = [18, 32, 150, 200, 12, 40];
   (cfg.portfolio || []).forEach(function (item, i) {
     var thumb = item.thumbnail;
-    if (!thumb && item.video && youTubeId(item.video)) {
+    // Off by default: fetching thumbnails from YouTube on page load would send
+    // every visitor's IP to Google before they choose to play anything.
+    if (!thumb && cfg.autoYouTubeThumbnails && item.video && youTubeId(item.video)) {
       thumb = "https://img.youtube.com/vi/" + youTubeId(item.video) + "/hqdefault.jpg";
     }
     var card = document.createElement(item.video ? "button" : "div");
@@ -77,8 +86,10 @@
     var bg = thumb
       ? 'style="background-image:url(\'' + esc(thumb) + '\')"'
       : 'style="--h:' + hues[i % hues.length] + '"';
+    // Custom thumbnails get a text description for screen readers.
+    var alt = thumb ? ' role="img" aria-label="' + esc(item.thumbnailAlt || ("Still from the " + item.title + " walkthrough")) + '"' : ' aria-hidden="true"';
     card.innerHTML =
-      '<div class="work-thumb' + (thumb ? " has-img" : "") + '" ' + bg + ">" +
+      '<div class="work-thumb' + (thumb ? " has-img" : "") + '" ' + bg + alt + ">" +
         '<svg class="house-art" viewBox="0 0 120 80" aria-hidden="true"><path d="M20 70V38L60 12l40 26v32z"/><rect x="50" y="46" width="20" height="24"/><rect x="30" y="44" width="12" height="10"/><rect x="78" y="44" width="12" height="10"/></svg>' +
         (item.video
           ? '<span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'

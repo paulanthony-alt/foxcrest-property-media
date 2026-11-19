@@ -7,7 +7,10 @@
     if (v) el.textContent = v;
   });
   document.querySelectorAll("[data-cfg-email]").forEach(function (el) {
-    if (cfg.email) { el.href = "mailto:" + cfg.email; el.textContent = cfg.email; }
+    if (!cfg.email) return;
+    var subj = el.getAttribute("data-subject");
+    el.href = "mailto:" + cfg.email + (subj ? "?subject=" + encodeURIComponent(subj) : "");
+    if (!el.hasAttribute("data-keep-text")) el.textContent = cfg.email;
   });
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
