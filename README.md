@@ -47,12 +47,26 @@ Add or edit an entry in `portfolio`:
 - **Default (no setup):** the form opens the visitor's email app with the request pre-filled to `email`.
 - **Recommended:** create a free form at [formspree.io](https://formspree.io), paste the endpoint (like `https://formspree.io/f/abcdwxyz`) into `formEndpoint`, and requests arrive in your inbox directly, without the visitor needing an email app.
 
+## Legal pages
+
+`terms.html`, `privacy.html` and `accessibility.html` are linked from the footer, and the quote form requires visitors to agree to the Terms and Privacy Policy. The business name, state, county and effective date on those pages come from the **Legal details** block at the top of `config.js`.
+
+These pages are a starting template, **not legal advice**. Have a local attorney review them before relying on them.
+
+Other things already in place to reduce risk:
+- An "estimate only" note under the live price estimate
+- A note that example videos are shown with permission
+- Color contrast, keyboard access and labels that pass an automated WCAG 2.1 AA scan (axe)
+- Fonts hosted on the site itself, so visitors' data isn't sent to Google
+
 ## Publishing
 
 Any static host works. Free options: GitHub Pages (Settings → Pages → deploy from branch), Netlify, or Cloudflare Pages. Just upload the folder; there is nothing to build.
 
 ## Before going live
 
+- [ ] Fill in the **Legal details** (`legalName`, `state`, `county`, `effectiveDate`) in `config.js`
+- [ ] Have an attorney review `terms.html` and `privacy.html`
 - [ ] Replace the placeholder email and phone in `config.js`
 - [ ] Replace the placeholder portfolio entries with real videos
 - [ ] Set up `formEndpoint` (optional but recommended)

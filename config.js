@@ -6,6 +6,13 @@
  * ============================================================
  */
 window.FOXCREST = {
+  // ---- Legal details (used on the Terms, Privacy and Accessibility pages) ----
+  // Replace the [BRACKETED] values before launch.
+  legalName: "Foxcrest Property Media",     // the business's legal name, e.g. "Foxcrest Property Media LLC"
+  state: "[STATE]",                          // where the business is based, e.g. "Texas"
+  county: "[COUNTY]",                        // for where disputes are handled, e.g. "Travis County"
+  effectiveDate: "[DATE]",                   // date the legal pages took effect, e.g. "December 1, 2026"
+
   // ---- Contact details (shown on the site) ----
   email: "hello@foxcrestpropertymedia.com",
   phone: "(555) 555-5555",

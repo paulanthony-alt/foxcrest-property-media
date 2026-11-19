@@ -4,8 +4,12 @@
   var prices = cfg.prices || { walkthrough: 300, campaignFirstMonth: 800, campaignMonthly: 1000 };
   var money = function (n) { return "$" + n.toLocaleString("en-US"); };
 
-  // ---------- Year ----------
+  // ---------- Year + shared settings ----------
   document.getElementById("year").textContent = new Date().getFullYear();
+  document.querySelectorAll("[data-cfg]").forEach(function (el) {
+    var v = cfg[el.dataset.cfg];
+    if (v) el.textContent = v;
+  });
 
   // ---------- Contact details ----------
   if (cfg.email) {
@@ -90,8 +94,12 @@
 
   document.querySelectorAll(".filter").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      document.querySelectorAll(".filter").forEach(function (b) { b.classList.remove("is-active"); });
+      document.querySelectorAll(".filter").forEach(function (b) {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("is-active");
+      btn.setAttribute("aria-pressed", "true");
       var f = btn.dataset.filter;
       grid.querySelectorAll(".work").forEach(function (c) {
         c.hidden = f !== "all" && c.dataset.type !== f;
@@ -163,6 +171,12 @@
       (!name ? form.elements.name : form.elements.email).focus();
       return;
     }
+    if (!form.elements.consent.checked) {
+      status.textContent = "Please tick the box to agree to our Terms and Privacy Policy.";
+      status.classList.add("is-error");
+      form.elements.consent.focus();
+      return;
+    }
     var est = estimate();
     var data = {
       name: name,
@@ -174,6 +188,7 @@
       campaign_months: cInput.value,
       estimate: money(est.total) + " (" + est.summary + ")",
       message: form.elements.message.value.trim(),
+      agreed_to_terms: "yes (" + new Date().toISOString() + ")",
     };
 
     if (cfg.formEndpoint) {
@@ -210,6 +225,7 @@
         "Walkthroughs: " + data.walkthroughs,
         "Campaign months: " + data.campaign_months,
         "Estimate: " + data.estimate,
+        "Agreed to Terms & Privacy: " + data.agreed_to_terms,
         "",
         data.message,
       ].join("\n");

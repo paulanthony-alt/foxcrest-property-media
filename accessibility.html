@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accessibility | Foxcrest Property Media</title>
+  <meta name="description" content="Foxcrest Property Media's commitment to an accessible website." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="./" class="brand" aria-label="Foxcrest Property Media home">
+        <img src="assets/logo.svg" alt="" width="36" height="36" />
+        <span>Foxcrest <em>Property Media</em></span>
+      </a>
+      <a href="./#quote" class="btn btn-small">Get a Quote</a>
+    </div>
+  </header>
+
+  <main id="main" class="legal">
+    <div class="container">
+      <p class="eyebrow">Legal</p>
+      <h1>Accessibility Statement</h1>
+      <p class="updated">Effective <span data-cfg="effectiveDate">[DATE]</span></p>
+
+      <p><span data-cfg="legalName">Foxcrest Property Media</span> wants everyone, including people with disabilities, to be able to use this website and find out about our services.</p>
+
+      <h2>What we've done</h2>
+      <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1, level AA. So far we have:</p>
+      <ul>
+        <li>Used text and button colors with enough contrast to read easily.</li>
+        <li>Made every part of the site usable with a keyboard, with visible focus outlines and a "skip to content" link.</li>
+        <li>Labelled every form field and given clear error messages.</li>
+        <li>Built the layout to work on phones, tablets and desktops, and when text is zoomed.</li>
+        <li>Respected your device's "reduce motion" setting.</li>
+      </ul>
+
+      <h2>Known limitations</h2>
+      <p>Some walkthrough videos may not yet have captions or audio descriptions. We're working on adding them. If you need a description of any property video, or information in another format, just ask and we'll provide it.</p>
+
+      <h2>Tell us about a problem</h2>
+      <p>If anything on this site is hard to use, please email <a data-cfg-email href="mailto:hello@foxcrestpropertymedia.com">hello@foxcrestpropertymedia.com</a>. Tell us the page and what went wrong, and we'll do our best to fix it or give you the information another way, usually within 5 business days.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <a href="./" class="brand">
+        <img src="assets/logo.svg" alt="" width="32" height="32" />
+        <span>Foxcrest <em>Property Media</em></span>
+      </a>
+      <nav>
+        <a href="./#work">Our Work</a>
+        <a href="./#pricing">Pricing</a>
+        <a href="./#quote">Contact</a>
+      </nav>
+      <p>&copy; <span id="year"></span> <span data-cfg="legalName">Foxcrest Property Media</span>. All rights reserved.</p>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="config.js"></script>
+  <script src="legal.js"></script>
+</body>
+</html>
