@@ -6,22 +6,20 @@
   <title>Foxcrest Property Media | Property Video Walkthroughs</title>
   <meta name="description" content="Foxcrest Property Media creates video walkthroughs of homes for sale, so buyers can tour a property from anywhere. $300 per walkthrough. Marketing campaigns available." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container nav">
-      <a href="#top" class="brand" aria-label="Foxcrest Property Media home">
+      <a href="./" class="brand" aria-label="Foxcrest Property Media home">
         <img src="assets/logo.svg" alt="" width="36" height="36" />
         <span>Foxcrest <em>Property Media</em></span>
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
-      <nav id="nav-links" class="nav-links">
+      <nav id="nav-links" class="nav-links" aria-label="Main">
         <a href="#work">Our Work</a>
         <a href="#why">Why Video</a>
         <a href="#pricing">Pricing</a>
@@ -31,7 +29,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="main">
     <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
@@ -71,13 +69,14 @@
           <h2>Example walkthroughs</h2>
           <p>A few tours we've filmed. Click any video to watch it.</p>
         </div>
-        <div class="filters" role="tablist" aria-label="Filter examples">
-          <button class="filter is-active" data-filter="all">All</button>
-          <button class="filter" data-filter="house">Houses</button>
-          <button class="filter" data-filter="condo">Condos & Apartments</button>
-          <button class="filter" data-filter="land">Land & Acreage</button>
+        <div class="filters" role="group" aria-label="Filter examples">
+          <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" data-filter="house" aria-pressed="false">Houses</button>
+          <button class="filter" data-filter="condo" aria-pressed="false">Condos & Apartments</button>
+          <button class="filter" data-filter="land" aria-pressed="false">Land & Acreage</button>
         </div>
         <div id="portfolio" class="portfolio"></div>
+        <p class="work-note">Videos are shown with the permission of the property owner or listing agent. Property details are as provided at the time of filming and may have changed. Videos play from YouTube or Vimeo and nothing loads from them until you press play.</p>
       </div>
     </section>
 
@@ -182,6 +181,7 @@
             <p class="estimate-label">Your estimate</p>
             <p class="estimate-total" id="estimate-total">$300</p>
             <p class="estimate-break" id="estimate-break">1 walkthrough × $300</p>
+            <p class="fine">Estimate only, before any applicable taxes or travel fees. Your final price is confirmed in a written quote before any work begins.</p>
           </div>
         </div>
 
@@ -191,7 +191,7 @@
             <label>Email<input name="email" type="email" autocomplete="email" required /></label>
           </div>
           <div class="row">
-            <label><span>Phone <small>(optional)</small></span><input name="phone" type="tel" autocomplete="tel" /></label>
+            <label><span>Phone <small>(optional, only used about this request)</small></span><input name="phone" type="tel" autocomplete="tel" /></label>
             <label>I am a…
               <select name="role">
                 <option>Real estate agent</option>
@@ -201,7 +201,7 @@
               </select>
             </label>
           </div>
-          <label>Property address or area<input name="address" type="text" placeholder="123 Main St, Springfield" /></label>
+          <label><span>Property address or area <small>(optional, helps us quote travel)</small></span><input name="address" type="text" autocomplete="off" placeholder="123 Main St, Springfield" /></label>
 
           <fieldset>
             <legend>What do you need?</legend>
@@ -223,6 +223,8 @@
 
           <label>Anything else we should know?<textarea name="message" rows="4" placeholder="Size of the property, timeline, preferred dates…"></textarea></label>
 
+          <label class="consent"><input type="checkbox" name="consent" required /><span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>, and I'm OK with Foxcrest Property Media contacting me about this request.</span></label>
+
           <button type="submit" class="btn btn-block">Send my quote request</button>
           <p class="form-status" id="form-status" role="status"></p>
         </form>
@@ -232,21 +234,27 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <a href="#top" class="brand">
-        <img src="assets/logo.svg" alt="" width="32" height="32" />
+      <a href="./" class="brand">
+        <img src="assets/logo-on-dark.svg" alt="" width="32" height="32" />
         <span>Foxcrest <em>Property Media</em></span>
       </a>
-      <nav>
+      <nav aria-label="Footer">
         <a href="#work">Our Work</a>
         <a href="#pricing">Pricing</a>
         <a href="#quote">Contact</a>
       </nav>
-      <p>&copy; <span id="year"></span> Foxcrest Property Media</p>
+      <p>&copy; <span id="year"></span> <span data-cfg="legalName">Foxcrest Property Media</span>. All rights reserved.</p>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="privacy.html#your-rights">Privacy choices &amp; data deletion</a>
+      </nav>
     </div>
   </footer>
 
   <!-- Video lightbox -->
-  <dialog id="video-modal" class="video-modal">
+  <dialog id="video-modal" class="video-modal" aria-label="Property walkthrough video">
     <button class="modal-close" aria-label="Close video">&times;</button>
     <div class="modal-body"></div>
   </dialog>

@@ -4,8 +4,12 @@
   var prices = cfg.prices || { walkthrough: 300, campaignFirstMonth: 800, campaignMonthly: 1000 };
   var money = function (n) { return "$" + n.toLocaleString("en-US"); };
 
-  // ---------- Year ----------
+  // ---------- Year + shared settings ----------
   document.getElementById("year").textContent = new Date().getFullYear();
+  document.querySelectorAll("[data-cfg]").forEach(function (el) {
+    var v = cfg[el.dataset.cfg];
+    if (v) el.textContent = v;
+  });
 
   // ---------- Contact details ----------
   if (cfg.email) {
@@ -25,6 +29,13 @@
   toggle.addEventListener("click", function () {
     var open = links.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && links.classList.contains("is-open")) {
+      links.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus();
+    }
   });
   links.addEventListener("click", function (ev) {
     if (ev.target.tagName === "A") {
@@ -46,7 +57,7 @@
     var yt = youTubeId(url);
     if (yt) return '<iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?autoplay=1&rel=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Property walkthrough"></iframe>';
     var vm = vimeoId(url);
-    if (vm) return '<iframe src="https://player.vimeo.com/video/' + vm + '?autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Property walkthrough"></iframe>';
+    if (vm) return '<iframe src="https://player.vimeo.com/video/' + vm + '?autoplay=1&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Property walkthrough"></iframe>';
     return '<video src="' + url + '" controls autoplay playsinline></video>';
   }
   function esc(s) {
@@ -56,10 +67,12 @@
   }
 
   var grid = document.getElementById("portfolio");
-  var hues = [18, 32, 150, 200, 12, 40];
+  var hues = [214, 204, 220, 198, 210, 216];
   (cfg.portfolio || []).forEach(function (item, i) {
     var thumb = item.thumbnail;
-    if (!thumb && item.video && youTubeId(item.video)) {
+    // Off by default: fetching thumbnails from YouTube on page load would send
+    // every visitor's IP to Google before they choose to play anything.
+    if (!thumb && cfg.autoYouTubeThumbnails && item.video && youTubeId(item.video)) {
       thumb = "https://img.youtube.com/vi/" + youTubeId(item.video) + "/hqdefault.jpg";
     }
     var card = document.createElement(item.video ? "button" : "div");
@@ -73,8 +86,10 @@
     var bg = thumb
       ? 'style="background-image:url(\'' + esc(thumb) + '\')"'
       : 'style="--h:' + hues[i % hues.length] + '"';
+    // Custom thumbnails get a text description for screen readers.
+    var alt = thumb ? ' role="img" aria-label="' + esc(item.thumbnailAlt || ("Still from the " + item.title + " walkthrough")) + '"' : ' aria-hidden="true"';
     card.innerHTML =
-      '<div class="work-thumb' + (thumb ? " has-img" : "") + '" ' + bg + ">" +
+      '<div class="work-thumb' + (thumb ? " has-img" : "") + '" ' + bg + alt + ">" +
         '<svg class="house-art" viewBox="0 0 120 80" aria-hidden="true"><path d="M20 70V38L60 12l40 26v32z"/><rect x="50" y="46" width="20" height="24"/><rect x="30" y="44" width="12" height="10"/><rect x="78" y="44" width="12" height="10"/></svg>' +
         (item.video
           ? '<span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>'
@@ -90,8 +105,12 @@
 
   document.querySelectorAll(".filter").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      document.querySelectorAll(".filter").forEach(function (b) { b.classList.remove("is-active"); });
+      document.querySelectorAll(".filter").forEach(function (b) {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("is-active");
+      btn.setAttribute("aria-pressed", "true");
       var f = btn.dataset.filter;
       grid.querySelectorAll(".work").forEach(function (c) {
         c.hidden = f !== "all" && c.dataset.type !== f;
@@ -163,6 +182,12 @@
       (!name ? form.elements.name : form.elements.email).focus();
       return;
     }
+    if (!form.elements.consent.checked) {
+      status.textContent = "Please tick the box to agree to our Terms and Privacy Policy.";
+      status.classList.add("is-error");
+      form.elements.consent.focus();
+      return;
+    }
     var est = estimate();
     var data = {
       name: name,
@@ -174,6 +199,7 @@
       campaign_months: cInput.value,
       estimate: money(est.total) + " (" + est.summary + ")",
       message: form.elements.message.value.trim(),
+      agreed_to_terms: "yes (" + new Date().toISOString() + ")",
     };
 
     if (cfg.formEndpoint) {
@@ -210,6 +236,7 @@
         "Walkthroughs: " + data.walkthroughs,
         "Campaign months: " + data.campaign_months,
         "Estimate: " + data.estimate,
+        "Agreed to Terms & Privacy: " + data.agreed_to_terms,
         "",
         data.message,
       ].join("\n");
