@@ -47,6 +47,25 @@ Add or edit an entry in `portfolio`:
 - **Default (no setup):** the form opens the visitor's email app with the request pre-filled to `email`.
 - **Recommended:** create a free form at [formspree.io](https://formspree.io), paste the endpoint (like `https://formspree.io/f/abcdwxyz`) into `formEndpoint`, and requests arrive in your inbox directly, without the visitor needing an email app.
 
+## Brand kit (`brand/`)
+
+Blue and white brand. Start with **`brand/foxcrest-brand-guide.pdf`** (logo, colors, fonts, voice).
+
+| Folder | What's in it |
+|---|---|
+| `brand/logo/svg/` | Logos as vector files: best for printing and the web |
+| `brand/logo/png/` | The same logos as images (transparent background, or navy for the white versions) |
+| `brand/social/` | Profile picture (1080²), Facebook cover (1640×624), link preview (1200×630), Instagram post template (1080×1350) |
+| `brand/print/` | Business card, 3.5×2 in, with 0.125 in bleed: send to any print shop |
+
+To change the business card details (name, phone…) or tweak the logo, edit `CONTACT` / `C` in `brand/source/build_brand.py` and run:
+
+```bash
+pip install fonttools brotli && python3 brand/source/build_brand.py
+```
+
+This regenerates everything, including the site's `assets/logo.svg` and favicon. Site colors are the `:root` variables at the top of `styles.css`.
+
 ## Legal pages
 
 `terms.html`, `privacy.html` and `accessibility.html` are linked from the footer, and the quote form requires visitors to agree to the Terms and Privacy Policy. The business name, state, county and effective date on those pages come from the **Legal details** block at the top of `config.js`.

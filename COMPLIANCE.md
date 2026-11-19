@@ -36,7 +36,7 @@ _Not legal advice. Have an attorney review `terms.html` and `privacy.html` befor
 
 | Asset | Source | License |
 |---|---|---|
-| `assets/logo.svg`, `assets/favicon.svg` | Made for this site | Owned by Foxcrest Property Media |
+| `assets/logo*.svg`, `assets/favicon.svg`, everything in `brand/` | Original fox-crest mark and wordmark made for Foxcrest (the wordmark is drawn from the Fraunces/Inter fonts, which OFL permits) | Owned by Foxcrest Property Media |
 | Icons (inline SVG in `index.html`) | Hand-drawn for this site | Owned by Foxcrest Property Media |
 | `assets/fonts/inter-*.woff2` | Inter, via Fontsource | SIL Open Font License 1.1 (`assets/fonts/LICENSE-Inter.txt`) |
 | `assets/fonts/fraunces-*.woff2` | Fraunces, via Fontsource | SIL Open Font License 1.1 (`assets/fonts/LICENSE-Fraunces.txt`) |

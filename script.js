@@ -67,7 +67,7 @@
   }
 
   var grid = document.getElementById("portfolio");
-  var hues = [18, 32, 150, 200, 12, 40];
+  var hues = [214, 204, 220, 198, 210, 216];
   (cfg.portfolio || []).forEach(function (item, i) {
     var thumb = item.thumbnail;
     // Off by default: fetching thumbnails from YouTube on page load would send
